@@ -33,15 +33,15 @@ public class ImageProcessingService {
             File libFile = new File(resource.toURI());
             System.load(libFile.getAbsolutePath());
 
-            log.info("✅ OpenCV library loaded successfully from: " + libFile.getAbsolutePath());
+            log.info("OpenCV library loaded successfully from: " + libFile.getAbsolutePath());
         } catch (Exception e) {
-            log.error("❌ Failed to load OpenCV library dynamically: " + e.getMessage(), e);
+            log.error(" Failed to load OpenCV library dynamically: " + e.getMessage(), e);
         }
     }
 
     public double compareSignatures(MultipartFile image1, MultipartFile image2) {
         try {
-            // 1️⃣ تحويل MultipartFile إلى Mat
+            //  تحويل MultipartFile إلى Mat
             Mat img1 = Imgcodecs.imdecode(new MatOfByte(image1.getBytes()), Imgcodecs.IMREAD_GRAYSCALE);
             Mat img2 = Imgcodecs.imdecode(new MatOfByte(image2.getBytes()), Imgcodecs.IMREAD_GRAYSCALE);
 
@@ -49,10 +49,10 @@ public class ImageProcessingService {
                 throw new RuntimeException("One of the images is empty or unreadable");
             }
 
-            // 2️⃣ إنشاء ORB detector
+            //  إنشاء ORB detector
             ORB orb = ORB.create();
 
-            // 3️⃣ استخراج keypoints و descriptors
+            //  استخراج keypoints و descriptors
             MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
             MatOfKeyPoint keypoints2 = new MatOfKeyPoint();
             Mat descriptors1 = new Mat();
@@ -65,12 +65,12 @@ public class ImageProcessingService {
                 throw new RuntimeException("Could not extract features from one of the images");
             }
 
-            // 4️⃣ استخدام Brute Force Matcher
+            //  استخدام Brute Force Matcher
             BFMatcher matcher = BFMatcher.create(Core.NORM_HAMMING, true);
             MatOfDMatch matches = new MatOfDMatch();
             matcher.match(descriptors1, descriptors2, matches);
 
-            // 5️⃣ تحليل نتائج المطابقة
+            // تحليل نتائج المطابقة
             List<DMatch> matchList = matches.toList();
 
             if (matchList.isEmpty()) return 0.0;
@@ -84,7 +84,7 @@ public class ImageProcessingService {
                 if (dist > maxDist) maxDist = dist;
             }
 
-            // 6️⃣ اعتبر الماتش "قوي" لو المسافة أقل من (2 × الحد الأدنى)
+            //  اعتبر الماتش "قوي" لو المسافة أقل من (2 × الحد الأدنى)
             List<DMatch> goodMatches = new ArrayList<>();
             for (DMatch match : matchList) {
                 if (match.distance <= 2 * minDist) {
@@ -92,7 +92,7 @@ public class ImageProcessingService {
                 }
             }
 
-            // 7️⃣ حساب نسبة التشابه
+            //  حساب نسبة التشابه
             double similarity = (double) goodMatches.size() / matchList.size();
 
             return Math.round(similarity * 100.0) / 100.0; // النتيجة بدقتين عشريتين
