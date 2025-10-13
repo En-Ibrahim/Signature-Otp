@@ -31,6 +31,11 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.42</lombok.version>
         <mapstruct-lombok.version>0.2.0</mapstruct-lombok.version>
+
+        <jjwt.version>0.11.5</jjwt.version>
+        <ehcache.version>3.10.8</ehcache.version>
+        <dotenv.version>3.2.0</dotenv.version>
+        <mockito.version>5.18.0</mockito.version>
     </properties>
     <dependencies>
         <dependency>
@@ -155,16 +160,16 @@
             <artifactId>spring-boot-testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.testcontainers</groupId>-->
-<!--            <artifactId>postgresql</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.security</groupId>-->
-<!--            <artifactId>spring-security-test</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.testcontainers</groupId>-->
+        <!--            <artifactId>postgresql</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.security</groupId>-->
+        <!--            <artifactId>spring-security-test</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -274,3 +279,4 @@
     </build>
 
 </project>
+
